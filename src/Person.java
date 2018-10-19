@@ -1,5 +1,6 @@
 public class Person {
 
+
     private boolean hasOpinionA;
 
     private Person inducer;
@@ -16,6 +17,7 @@ public class Person {
         this.hasOpinionA = true;
     }
 
+    /** Person meets another person **/
     public void meet(Person other) {
         //TODO: implement meeting another person
     }
