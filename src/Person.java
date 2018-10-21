@@ -28,7 +28,6 @@ public class Person {
         this.hasOpinionA = true;
     }
 
-
     // update Susception state
     public void updateSusceptionState() {
        // System.out.print( this + ": Days Left: " + this.susceptibleDurationLeft  + "\n");
@@ -49,7 +48,7 @@ public class Person {
 
     public boolean checkInducerMet(Person other) {
 
-        if (this.inducer != null && ( this.inducer == other || other.inducer == this) ) {
+        if (this.inducer != null && ( this.inducer == other) ) {
             return true;
         }
         return false;
@@ -59,10 +58,10 @@ public class Person {
     public void meetWith(Person other, double p) {
        // System.out.print(this + " has Opinion A: " +this.hasOpinionA +" meets " + other + " has Opinion A: " + other.hasOpinionA + "\n");
 
-        // Person hasnt met other person during five Days
+        // Person hasnt met this particular other person during five Days
         if ( !this.checkInducerMet(other) ) {
 
-            // Person has Opinion A, other person has been turned susceptible by another Person
+            // Person is in susceptionstate, other person has Opinion A
             if (this.susceptionState && other.hasOpinionA) {
 
                 // Set Opinion of this Person to A by chance
@@ -71,30 +70,15 @@ public class Person {
                 }
             }
 
-            // Other person has Opinion A, Person has been turned susceptible by another Person
-            else if (other.susceptionState && this.hasOpinionA) {
-
-                // Set Opinion of other Person to A by chance
-                if (Math.random() < p) {
-                    other.changeOpinion();
-                }
-
-                // Person has Opinion A, other person has not been turned susceptible till now
-            } else if (!this.susceptionState && other.hasOpinionA) {
+            // Person is not in susceptionstatehas, other person has Opinion
+            else if (!this.susceptionState && other.hasOpinionA) {
 
                 // Set other to inducer and turn on susceptible state of this person
                 this.inducer = other;
                 this.susceptionState = true;
-
-                // Other Person has Opinion A, this person has not been turned susceptible till now
-            } else if (other.susceptionState && !this.hasOpinionA) {
-
-                // Set this to inducer and turn on susceptible state of this other
-                other.inducer = this;
-                other.susceptionState = true;
             }
         }
-        }
+    }
 
 
     public String toString() {
