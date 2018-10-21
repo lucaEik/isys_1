@@ -30,7 +30,7 @@ public class Person {
 
 
     // update Susception state
-    public void updateSusception() {
+    public void updateSusceptionState() {
        // System.out.print( this + ": Days Left: " + this.susceptibleDurationLeft  + "\n");
         if ( this.susceptibleDurationLeft != 1 ) {
             susceptibleDurationLeft--;

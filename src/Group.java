@@ -60,8 +60,8 @@ public class Group {
                     // In Case this Person is susceptible, update Susception state
                     people.get(i).meetWith(people.get(j), P);
                 }
-                if ( people.get(i).susceptible ) {
-                    people.get(i).updateSusception();
+                if ( people.get(i).susceptionState ) {
+                    people.get(i).updateSusceptionState();
                 }
                 counter++;
             }
