@@ -49,7 +49,7 @@ public class Person {
 
     public boolean checkInducerMet(Person other) {
 
-        if (this.inducer != null && this.inducer == other) {
+        if (this.inducer != null && ( this.inducer == other || other.inducer == this) ) {
             return true;
         }
         return false;
@@ -65,9 +65,18 @@ public class Person {
             // Person has Opinion A, other person has been turned susceptible by another Person
             if (this.susceptionState && other.hasOpinionA) {
 
-                // Set Opinion of other Person to A by chance
+                // Set Opinion of this Person to A by chance
                 if (Math.random() < p) {
                     this.changeOpinion();
+                }
+            }
+
+            // Other person has Opinion A, Person has been turned susceptible by another Person
+            else if (other.susceptionState && this.hasOpinionA) {
+
+                // Set Opinion of other Person to A by chance
+                if (Math.random() < p) {
+                    other.changeOpinion();
                 }
 
                 // Person has Opinion A, other person has not been turned susceptible till now
@@ -76,9 +85,17 @@ public class Person {
                 // Set other to inducer and turn on susceptible state of this person
                 this.inducer = other;
                 this.susceptionState = true;
+
+                // Other Person has Opinion A, this person has not been turned susceptible till now
+            } else if (other.susceptionState && !this.hasOpinionA) {
+
+                // Set this to inducer and turn on susceptible state of this other
+                other.inducer = this;
+                other.susceptionState = true;
             }
         }
-    }
+        }
+
 
     public String toString() {
         return "Person[" + this.tempID + "]";

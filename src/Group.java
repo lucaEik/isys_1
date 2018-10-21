@@ -57,9 +57,9 @@ public class Group {
         while (finished() < this.people.size()) {
             for ( int i = 0; i < this.people.size(); i++) {
                 for ( int j = counter; j < this.people.size(); j++) {
-                    // In Case this Person is susceptible, update Susception state
                     people.get(i).meetWith(people.get(j), P);
                 }
+                // In Case this Person is susceptible, update Susception state
                 if ( people.get(i).susceptionState ) {
                     people.get(i).updateSusceptionState();
                 }
