@@ -3,4 +3,5 @@ public final class Constants {
 
     public static final double P = 0.5;
     public static final int GROUP_SIZE = 50;
+    private static final Integer SusceptibleStateDuration = 5;
 }

@@ -14,10 +14,10 @@ public class Group {
         this.day = 0;
         this.people = new ArrayList<>();
         for (int i = 0; i < groupSize - opinionAPopularity; i++) {
-            this.people.add(new Person(false));
+            this.people.add(new Person(false, i+1));
         }
         for (int i = 0; i < opinionAPopularity; i++) {
-            this.people.add(new Person(true));
+            this.people.add(new Person(true, people.size()+1));
         }
     }
 
@@ -28,13 +28,49 @@ public class Group {
                     person.changeOpinion();
                 }
             }
-            System.out.println("Day " + this.day + ": " + finished() + " / " + this.people.size());
             day++;
+            System.out.println("Day " + this.day + ": " + finished() + " / " + this.people.size());
         }
     }
 
+    /**
+     * Meet-Matrix
+     * x = meet
+     * ______________________
+     * 0 1 2 3 4 5 6 7 8 9
+     * 1 - x x x x x x x x
+     * 2 - - x x x x x x x
+     * 3 - - - x x x x x x
+     * 4 - - - - x x x x x
+     * 5 - - - - - x x x x
+     * 6 - - - - - - x x x
+     * 7 - - - - - - - x x
+     * 8 - - - - - - - - x
+     * 9 - - - - - - - - x
+     *
+     *  Every Person meets other person exactly once a day
+     **/
+
     public void simulateDependant() {
-        //TODO implement independent simulation
+        day = 0;
+        int counter = 1;
+        while (finished() < this.people.size()) {
+            for ( int i = 0; i < this.people.size(); i++) {
+                for ( int j = counter; j < this.people.size(); j++) {
+                    // In Case this Person is susceptible, update Susception state
+                    people.get(i).meetWith(people.get(j), P);
+                }
+                if ( people.get(i).susceptible ) {
+                    people.get(i).updateSusception();
+                }
+                counter++;
+            }
+            day++;
+            System.out.println("Day " + this.day + ": " + finished() + " / " + this.people.size());
+            counter = 1;
+        }
+
+
     }
 
     private boolean isFinished() {
