@@ -46,7 +46,7 @@ public class Group {
      * 6 - - - - - - x x x
      * 7 - - - - - - - x x
      * 8 - - - - - - - - x
-     * 9 - - - - - - - - x
+     * 9 - - - - - - - - -
      *
      *  Every Person meets other person exactly once a day
      **/
