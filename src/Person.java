@@ -55,7 +55,7 @@ public class Person {
     }
 
     /** Person meets another person **/
-    public void meetWith(Person other, double p) {
+    public void meetWith(Person other) {
        // System.out.print(this + " has Opinion A: " +this.hasOpinionA +" meets " + other + " has Opinion A: " + other.hasOpinionA + "\n");
 
         // Person hasnt met this particular other person during five Days
@@ -64,10 +64,9 @@ public class Person {
             // Person is in susceptionstate, other person has Opinion A
             if (this.susceptionState && other.hasOpinionA) {
 
-                // Set Opinion of this Person to A by chance
-                if (Math.random() < p) {
-                    this.changeOpinion();
-                }
+                // Set Opinion of this Person to A
+                this.changeOpinion();
+
             }
 
             // Person is not in susceptionstatehas, other person has Opinion
