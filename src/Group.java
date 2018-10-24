@@ -9,7 +9,7 @@ public class Group {
 
     private List<Person> people;
 
-    public Group(int groupSize, int opinionAPopularity, double p) {
+    public Group(int groupSize, int opinionAPopularity, double p) { // Constructor for Simulation
         this.P = p;
         this.day = 0;
         this.people = new ArrayList<>();
@@ -21,6 +21,8 @@ public class Group {
         }
     }
 
+    public Group() { } // Constructor for Groupobject
+
     public int simulateIndependent() {
 
         while (finished() < this.people.size()) {
@@ -30,7 +32,7 @@ public class Group {
                 }
             }
             day++;
-            System.out.println("Day " + this.day + ": " + finished() + " / " + this.people.size());
+            //System.out.println("Day " + this.day + ": " + finished() + " / " + this.people.size());
         }
         return day;
     }
@@ -96,15 +98,6 @@ public class Group {
             System.out.println(i + 1 + ". Iteration of Independent: Average = " + totalDays / (i + 1));
         }
 
-    }
-
-    private boolean isFinished() {
-        for (Person person : this.people) {
-            if (!person.getHasOpinionA()) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private int finished() {
