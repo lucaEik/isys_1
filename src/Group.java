@@ -80,7 +80,7 @@ public class Group {
 
     public void iterateSimulateDependent(int amount, double p) {
         int totalDays = 0;
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < amount; i++) {
 
             totalDays += new Group(50, 3, p).simulateDependent();
 
@@ -91,7 +91,7 @@ public class Group {
 
     public void iterateSimulateIndependent(int amount, double p) {
         int totalDays = 0;
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < amount; i++) {
 
             totalDays += new Group(50, 0, p).simulateIndependent();
 

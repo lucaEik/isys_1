@@ -6,12 +6,12 @@ public class Main {
 
         System.out.print("---- Independent Simulation ----" + "\n");
 
-        g.iterateSimulateIndependent(200, 0.022);
+        g.iterateSimulateIndependent(2000, 0.022);
 
 
         System.out.print("\n"+"---- dependent Simulation ----" + "\n");
 
-        g.iterateSimulateDependent(200, 0.00442);
+        g.iterateSimulateDependent(2000, 0.00442);
 
     }
 }
