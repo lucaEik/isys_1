@@ -21,7 +21,8 @@ public class Group {
         }
     }
 
-    public void simulateIndependent() {
+    public int simulateIndependent() {
+
         while (finished() < this.people.size()) {
             for (Person person : this.people) {
                 if (Math.random() < P) {
@@ -31,6 +32,7 @@ public class Group {
             day++;
             System.out.println("Day " + this.day + ": " + finished() + " / " + this.people.size());
         }
+        return day;
     }
 
     /**
@@ -51,7 +53,7 @@ public class Group {
      *  Every Person meets other person exactly once a day
      **/
 
-    public void simulateDependant() {
+    public int simulateDependent() {
         day = 0;
         int counter = 1;
         while (finished() < this.people.size()) {
@@ -68,10 +70,31 @@ public class Group {
                 counter++;
             }
             day++;
-            System.out.println("Day " + this.day + ": " + finished() + " / " + this.people.size());
             counter = 1;
+            //System.out.println("Day " + this.day + ": " + finished() + " / " + this.people.size());
+        }
+        return day;
+    }
+
+    public void iterateSimulateDependent(int amount, double p) {
+        int totalDays = 0;
+        for (int i = 0; i < 100; i++) {
+
+            totalDays += new Group(50, 3, p).simulateDependent();
+
+            System.out.println(i + 1 + ". Iteration of dependent: Average = " + totalDays / (i + 1));
         }
 
+    }
+
+    public void iterateSimulateIndependent(int amount, double p) {
+        int totalDays = 0;
+        for (int i = 0; i < 100; i++) {
+
+            totalDays += new Group(50, 0, p).simulateIndependent();
+
+            System.out.println(i + 1 + ". Iteration of Independent: Average = " + totalDays / (i + 1));
+        }
 
     }
 

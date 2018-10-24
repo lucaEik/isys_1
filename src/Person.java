@@ -48,7 +48,7 @@ public class Person {
 
     public boolean checkInducerMet(Person other) {
 
-        if (this.inducer != null && ( this.inducer == other) ) {
+        if (this.inducer != null && ( this.inducer == other || other.inducer == this) ) {
             return true;
         }
         return false;
@@ -63,18 +63,27 @@ public class Person {
 
             // Person is in susceptionstate, other person has Opinion A
             if (this.susceptionState && other.hasOpinionA) {
-
                 // Set Opinion of this Person to A
                 this.changeOpinion();
 
             }
+            else if (other.susceptionState && this.hasOpinionA) {
+
+                // Set Opinion of this Person to A
+                other.changeOpinion();
+            }
 
             // Person is not in susceptionstatehas, other person has Opinion
             else if (!this.susceptionState && other.hasOpinionA) {
-
                 // Set other to inducer and turn on susceptible state of this person
                 this.inducer = other;
                 this.susceptionState = true;
+            }
+
+            else if (!other.susceptionState && this.hasOpinionA) {
+                // Set other to inducer and turn on susceptible state of this person
+                other.inducer = this;
+                other.susceptionState = true;
             }
         }
     }

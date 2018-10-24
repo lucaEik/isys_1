@@ -2,10 +2,13 @@ public class Main {
     //TODO: implement solution for changing values
     public static void main(String args[]) {
         System.out.print("---- Independent Simulation ----" + "\n");
-        Group g = new Group(50, 0, 0.4);
-        g.simulateIndependent();
+        Group g = new Group(50, 0, 0.3);
+        g.iterateSimulateDependent(2000, 0.00442);
+
+
         System.out.print("\n"+"---- dependent Simulation ----" + "\n");
-        Group g2 = new Group(50, 3, 0.4);
-        g2.simulateDependant();
+
+        g.iterateSimulateIndependent(2000, 0.00442);
+
     }
 }
