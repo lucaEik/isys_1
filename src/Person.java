@@ -48,7 +48,7 @@ public class Person {
 
     public boolean checkInducerMet(Person other) {
 
-        if (this.inducer != null && ( this.inducer == other || other.inducer == this) ) {
+        if ( (this.inducer != null && this.inducer == other ) || ( other.inducer != null && other.inducer == this) ) {
             return true;
         }
         return false;
