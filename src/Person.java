@@ -2,8 +2,6 @@ import java.util.logging.Logger;
 
 public class Person {
 
-    private int tempID; // ID to check matrix
-
     private boolean hasOpinionA;
 
     private Person inducer;
@@ -19,9 +17,8 @@ public class Person {
         return this.hasOpinionA;
     }
 
-    public Person(boolean hasOpinionA, int tempID) {
+    public Person(boolean hasOpinionA) {
         this.hasOpinionA = hasOpinionA;
-        this.tempID = tempID;
     }
 
     public void changeOpinion() {
@@ -86,10 +83,6 @@ public class Person {
                 other.susceptionState = true;
             }
         }
-    }
-
-    public String toString() {
-        return "Person[" + this.tempID + "]";
     }
 }
 
