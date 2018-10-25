@@ -73,11 +73,10 @@ public class Group {
             }
             day++;
             counter = 1;
-            //System.out.println("Day " + this.day + ": " + finished() + " / " + this.people.size());
         }
         return day;
     }
-
+    /*
     public void iterateSimulateDependent(int amount, double p) {
         int totalDays = 0;
         for (int i = 0; i < amount; i++) {
@@ -99,7 +98,7 @@ public class Group {
         }
 
     }
-
+    */
     private int finished() {
         int sum = 0;
         for (Person person : this.people) {
