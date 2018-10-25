@@ -13,8 +13,9 @@ public class LineChart extends JFrame {
     public LineChart(String title) {
         super(title);
         // Create dataset
-        HashMap<String, Integer> map = new HashMap<>();
-        DefaultCategoryDataset dataset = createDataset(map);
+        double[] dependent = {};
+        double[] independent = {};
+        DefaultCategoryDataset dataset = createDataset(dependent, independent);
         // Create chart
         JFreeChart chart = ChartFactory.createLineChart(
                 "Opinion", // Chart title
@@ -34,7 +35,7 @@ public class LineChart extends JFrame {
         String series1 = "dependent";
         String series2 = "independent";
 
-        Iterator itr = dependent.iterator();
+
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.addValue(200, series1, "2016-12-19");

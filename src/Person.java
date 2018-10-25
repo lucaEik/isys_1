@@ -59,7 +59,7 @@ public class Person {
        // System.out.print(this + " has Opinion A: " +this.hasOpinionA +" meets " + other + " has Opinion A: " + other.hasOpinionA + "\n");
 
         // Person hasnt met this particular other person during five Days
-        if ( !this.checkInducerMet(other) ) {
+        if ( !this.checkInducerMet(other) ) {   //if (this.susceptionState() &&
 
             // Person is in susceptionstate, other person has Opinion A
             if (this.susceptionState && other.hasOpinionA) {
@@ -87,7 +87,6 @@ public class Person {
             }
         }
     }
-
 
     public String toString() {
         return "Person[" + this.tempID + "]";
