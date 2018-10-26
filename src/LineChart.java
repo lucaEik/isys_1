@@ -4,23 +4,28 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 import javax.swing.JFrame;
 import org.jfree.chart.plot.PlotOrientation;
+import java.util.List;
 
-import java.security.Key;
-import java.util.*;
-
+/**
+ * A JFrame with a line chart showing the results of the simulation. The line chart displays the average popularity of A
+ * for each day of the simulation.
+ */
 public class LineChart extends JFrame {
 
-    public LineChart(String title) {
+    /**
+     * Creates a Window with a line chart, displaying the values from the two lists given as arguments.
+     * @param title The Window's title
+     * @param independent A list containing the values for the independent simulation
+     * @param dependent A List containing the values for the dependent simulation
+     */
+    public LineChart(String title, List<Double> independent, List<Double> dependent) {
         super(title);
-        // Create dataset
-        double[] dependent = {};
-        double[] independent = {};
         DefaultCategoryDataset dataset = createDataset(dependent, independent);
         // Create chart
         JFreeChart chart = ChartFactory.createLineChart(
-                "Opinion", // Chart title
-                "Date", // X-Axis Label
-                "Number of Visitor", // Y-Axis Label
+                "Spreading of Opinion A", // Chart title
+                "Time (in days)", // X-Axis Label
+                "Popularity of A (in %)", // Y-Axis Label
                 dataset,PlotOrientation.VERTICAL,
                 true,true,false
         );
@@ -28,31 +33,26 @@ public class LineChart extends JFrame {
         setContentPane(panel);
     }
 
-    public DefaultCategoryDataset createDataset(double[] dependent, double[] independent) {
-        // Key : tage // Value prozentualen anteil der leute die die meinung a haben
-        //
-
-        String series1 = "dependent";
-        String series2 = "independent";
-
-
+    /**
+     * Creates a Dataset containing the values from the simulations whith day as the column key and the row keys
+     * "independent" and "dependent"
+     * @param independent The values from the independent simulation
+     * @param dependent The values from the dependent simulations
+     * @return A Dataset containing the values from both simulations
+     */
+    public DefaultCategoryDataset createDataset(List<Double> independent, List<Double> dependent) {
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(200, series1, "2016-12-19");
-        dataset.addValue(150, series1, "2016-12-20");
-        dataset.addValue(100, series1, "2016-12-21");
-        dataset.addValue(210, series1, "2016-12-22");
-        dataset.addValue(240, series1, "2016-12-23");
-        dataset.addValue(195, series1, "2016-12-24");
-        dataset.addValue(245, series1, "2016-12-25");
 
-        dataset.addValue(150, series2, "2016-12-19");
-        dataset.addValue(130, series2, "2016-12-20");
-        dataset.addValue(95, series2, "2016-12-21");
-        dataset.addValue(195, series2, "2016-12-22");
-        dataset.addValue(200, series2, "2016-12-23");
-        dataset.addValue(180, series2, "2016-12-24");
-        dataset.addValue(230, series2, "2016-12-25");
+        // Adding the values from the independent simulation
+        for (Double d : independent) {
+            dataset.addValue(d * 100, "independent", "" + independent.indexOf(d));
+        }
+
+        // Adding the values from the dependent simulation
+        for (Double d : dependent) {
+            dataset.addValue(d * 100, "dependent", "" + dependent.indexOf(d));
+        }
 
         return dataset;
     }

@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,13 +74,14 @@ public class Simulator {
             results.add(duration);
             avgDuration += duration.size();
         }
-
+        // determine the longest array in the reults list:
         int longest = 0;
         for (List l : results) {
             if (l.size() > longest) {
                 longest = l.size();
             }
         }
+        // create List with average popularity for each day
         ArrayList<Double> avg = new ArrayList<>();
         for (int i = 0; i < longest; i++) {
             avg.add(0.0);
@@ -95,14 +94,16 @@ public class Simulator {
             }
             avg.set(i, avg.get(i) / results.size());
         }
+
+        // print out the results
         System.out.println("---- " + (this.dependent ? "dependent" : "independent") + " Simulation ----");
         System.out.println("Average Duration for all People to reach opinion a: " + avgDuration / this.iterations);
-        /*
+        System.out.println("Average Popularity(%) for each day:");
+        String output;
         for (int i = 0; i < avg.size(); i++) {
-            System.out.println("Average popularity of Opinion A on day " + (i + 1) + ":  " + new DecimalFormat("#.###").format(avg.get(i) * 100) + " %");
-
+            output = String.format("%2d%14f", i, avg.get(i) * 100);
+            System.out.println(output);
         }
-        */
         return avg;
     }
 }
