@@ -5,6 +5,9 @@ import java.util.*;
  */
 public class Group {
 
+    /**
+     * The probability factor needed for the simulations
+     */
     private double P;
 
     /**
@@ -71,7 +74,7 @@ public class Group {
      * 8 - - - - - - - - x
      * 9 - - - - - - - - -
      *
-     *  Every Person meets other person exactly once a day
+     *  Every Person meets other person exactly once a day by chance (P)
      **/
 
     /**
