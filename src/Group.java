@@ -74,18 +74,13 @@ public class Group {
      * 8 - - - - - - - - x
      * 9 - - - - - - - - -
      *
-     *  Every Person meets other person exactly once a day by chance (P)
-     **/
-
-    /**
-     * Simulates the dependent spreading of opinion A in this group
+     * Every Person meets other person exactly once a day by chance (P).
+     * Simulates the dependent spreading of opinion A in this group.
      * @return A List containing the percentage of people who have opinion A for every day of the simulation
      */
     public List<Double> simulateDependent() {
-        day = 0;
         int counter = 1;
         List<Double> aPercentage = new ArrayList<>();
-        int fin;
         while (opinionASpreading() < this.people.size()) {
             for ( int i = 0; i < this.people.size(); i++) {
                 for ( int j = counter; j < this.people.size(); j++) {
@@ -99,8 +94,6 @@ public class Group {
                 }
                 counter++;
             }
-
-            day++;
             counter = 1;
             aPercentage.add((double)opinionASpreading() / this.people.size());
         }

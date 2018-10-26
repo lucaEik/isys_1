@@ -7,14 +7,14 @@ public class Main {
 
         /**
          * A Simulator returns a list containing the average percentage of people in a group which changed
-         * their opinion on the required days
+         * their opinion based on the required days
          */
         List<Double> independent = new Simulator(0.0222, 50, 2000, 0, false).simulate();
         List<Double> dependent = new Simulator(0.00442, 50, 2000, 3, true).simulate();
 
         /**
          * The invokeLater method delays the construction of the LineChart. The LineChart needs
-         * the data as a whole before building the chart.
+         * the data from simulations as a whole before building the chart.
          */
         SwingUtilities.invokeLater(() -> {
             LineChart example = new LineChart("Average days for People to change Opinion", independent, dependent);
