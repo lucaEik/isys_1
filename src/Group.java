@@ -1,29 +1,49 @@
 import java.util.*;
 
+/**
+ * This class represents a group of people among which the spreading of opinion A is simulated
+ */
 public class Group {
 
-    public static ArrayList chartData = new ArrayList();
     private double P;
 
+    /**
+     * The current day of the simulation
+     */
     private int day;
 
+    /**
+     * The Groups people
+     */
     private List<Person> people;
 
+    /**
+     * Creates a new Instance of the Group class
+     * @param groupSize The amount of people in this group
+     * @param opinionAPopularity The amount of people who hold opinion A at the beginning of the simulation
+     * @param p the Probability for two people to meet each other or the probability for a person to change to opinion
+     *          autonomously, depending on if the spreading of a simulation happens dependently or independently.
+     */
     public Group(int groupSize, int opinionAPopularity, double p) { // Constructor for Simulation
         this.P = p;
         this.day = 0;
         this.people = new ArrayList<>();
         for (int i = 0; i < groupSize - opinionAPopularity; i++) {
-            this.people.add(new Person(false, i+1));
+            this.people.add(new Person(false ));
         }
         for (int i = 0; i < opinionAPopularity; i++) {
-            this.people.add(new Person(true, people.size()+1));
+            this.people.add(new Person(true));
         }
     }
 
-    public int simulateIndependent() {
 
-        while (finished() < this.people.size()) {
+    /**
+     * Simulates the independent spreading of opinion A in this group
+     * @return A List containing the percentage of people who have opinion A for every day of the simulation
+     */
+    public List<Double> simulateIndependent() {
+        List<Double> aPercentage = new ArrayList<>();
+        while (opinionASpreading() < this.people.size()) {
             for (Person person : this.people) {
 
                 if (Math.random() < P) {
@@ -31,15 +51,9 @@ public class Group {
 
                 }
             }
-
-
-            chartData.add(finished());
-            day++;
-
-           // System.out.println("Day " + this.day + ": " + finished() + " / " + this.people.size());
+            aPercentage.add((double)opinionASpreading() / this.people.size());
         }
-
-        return day;
+        return aPercentage;
     }
 
     /**
@@ -60,10 +74,16 @@ public class Group {
      *  Every Person meets other person exactly once a day
      **/
 
-    public int simulateDependent() {
+    /**
+     * Simulates the dependent spreading of opinion A in this group
+     * @return A List containing the percentage of people who have opinion A for every day of the simulation
+     */
+    public List<Double> simulateDependent() {
         day = 0;
         int counter = 1;
-        while (finished() < this.people.size()) {
+        List<Double> aPercentage = new ArrayList<>();
+        int fin;
+        while (opinionASpreading() < this.people.size()) {
             for ( int i = 0; i < this.people.size(); i++) {
                 for ( int j = counter; j < this.people.size(); j++) {
                     if (Math.random() < P) {
@@ -79,11 +99,17 @@ public class Group {
 
             day++;
             counter = 1;
+            aPercentage.add((double)opinionASpreading() / this.people.size());
         }
-        return day;
+        return aPercentage;
     }
 
-    private int finished() {
+
+    /**
+     * Detetermines the Amount of people in this group who have opinion a
+     * @return The amount of people in this group who have opinion A
+     */
+    private int opinionASpreading() {
         int sum = 0;
         for (Person person : this.people) {
             if (person.getHasOpinionA()) {

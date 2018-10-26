@@ -1,28 +1,23 @@
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
+import java.util.List;
 
 
 public class Main {
-    //TODO: implement solution for changing values
     public static void main(String args[]) {
 
-
-        System.out.print("---- Independent Simulation ----" + "\n");
-        new Simulator(0.022, 50, 20, 0, false).simulate();
-        System.out.print("\n" + "---- dependent Simulation ----" + "\n");
-        new Simulator(0.00442, 50, 20, 3, true).simulate();
+        List<Double> dataInd = new Simulator(0.02222, 50, 200, 0, false).simulate();
+        List<Double> dataD = new Simulator(0.00444, 50, 200, 3, true).simulate();
 
         SwingUtilities.invokeLater(() -> {
             LineChart example = new LineChart("Average days for People to change Opinion");
+            example.setUp(dataInd, dataD);
             example.setAlwaysOnTop(true);
             example.pack();
-            example.setSize(600, 400);
+            example.setSize(1000, 600);
             example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             example.setVisible(true);
         });
-
-
     }
 }
-

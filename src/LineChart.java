@@ -13,14 +13,16 @@ public class LineChart extends JFrame {
     public LineChart(String title) {
         super(title);
         // Create dataset
-        ArrayList data = Group.chartData;
+    }
 
-        DefaultCategoryDataset dataset = createDataset(data);
+    public void setUp(List dataInd, List dataD) {
+
+        DefaultCategoryDataset dataset = createDataset(dataInd, dataD);
         // Create chart
         JFreeChart chart = ChartFactory.createLineChart(
                 "Opinion", // Chart title
-                "Individuals w/ opinion A", // X-Axis Label
-                "Number of Days", // Y-Axis Label
+                "Days Passed", // X-Axis Label
+                "Percentage of People with opinion A", // Y-Axis Label
                 dataset,PlotOrientation.VERTICAL,
                 true,true,false
         );
@@ -28,51 +30,24 @@ public class LineChart extends JFrame {
         setContentPane(panel);
     }
 
-    public DefaultCategoryDataset createDataset(ArrayList data) {
-        // Key : tage // Value prozentualen anteil der leute die die meinung a haben
-        //
-        Map <Integer, List<Integer>> map = new HashMap<>();
+    public DefaultCategoryDataset createDataset(List dataIndependet, List dataDependent) {
+
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        int count = 0;
+        Iterator ittr = dataIndependet.iterator();
+        Iterator ittr_2 = dataDependent.iterator();
         int dayCounter = 1;
-        Iterator ittr = data.iterator();
-        String series1 = "dependent";
-        String series2 = "independent";
+        String series1 = "independent";
+        String series2 = "dependent";
         while (ittr.hasNext()) {
-            int val = (Integer)ittr.next();
-            if (map.get(dayCounter) == null) {
-                map.put(dayCounter, new LinkedList<Integer>());}
-                else {
-                    map.get(dayCounter).add(val);
-                }
-
-                if (ittr.hasNext() && val == Constants.GROUP_SIZE) {
-                    dayCounter = 0;
-                }
-                dayCounter++;
+            dataset.addValue((double)ittr.next(), series1, String.valueOf(dayCounter) );
+            dayCounter++;
         }
-
-        int counter = 0;
-        int avg = 0;
-        for (Map.Entry<Integer, List<Integer>> ent : map.entrySet()){
-            for (Integer val : ent.getValue()){
-                System.out.println("val: " + val);
-                avg += val;
-                counter ++;
-
-            }
-            System.out.println("avg: " + avg);
-            System.out.println("counter: " + counter);
-            if (avg != 0 ) {
-                dataset.addValue(avg/ent.getValue().size(), series1, String.valueOf(counter));
-            }
-
-            avg = 0;
-            counter = 0;
+        dayCounter = 1;
+        while (ittr_2.hasNext()) {
+            dataset.addValue((double)ittr_2.next(), series2, String.valueOf(dayCounter) );
+            dayCounter++;
         }
-
-       // System.out.print(map);
-       // dataset.addValue((Integer)ittr.next(), series1, String.valueOf(dayCounter));
         return dataset;
     }
 }
+
