@@ -13,14 +13,14 @@ public class LineChart extends JFrame {
     public LineChart(String title) {
         super(title);
         // Create dataset
-        double[] dependent = {};
-        double[] independent = {};
-        DefaultCategoryDataset dataset = createDataset(dependent, independent);
+        ArrayList data = Group.chartData;
+
+        DefaultCategoryDataset dataset = createDataset(data);
         // Create chart
         JFreeChart chart = ChartFactory.createLineChart(
                 "Opinion", // Chart title
-                "Date", // X-Axis Label
-                "Number of Visitor", // Y-Axis Label
+                "Individuals w/ opinion A", // X-Axis Label
+                "Number of Days", // Y-Axis Label
                 dataset,PlotOrientation.VERTICAL,
                 true,true,false
         );
@@ -28,32 +28,51 @@ public class LineChart extends JFrame {
         setContentPane(panel);
     }
 
-    public DefaultCategoryDataset createDataset(double[] dependent, double[] independent) {
+    public DefaultCategoryDataset createDataset(ArrayList data) {
         // Key : tage // Value prozentualen anteil der leute die die meinung a haben
         //
-
+        Map <Integer, List<Integer>> map = new HashMap<>();
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        int count = 0;
+        int dayCounter = 1;
+        Iterator ittr = data.iterator();
         String series1 = "dependent";
         String series2 = "independent";
+        while (ittr.hasNext()) {
+            int val = (Integer)ittr.next();
+            if (map.get(dayCounter) == null) {
+                map.put(dayCounter, new LinkedList<Integer>());}
+                else {
+                    map.get(dayCounter).add(val);
+                }
 
+                if (ittr.hasNext() && val == Constants.GROUP_SIZE) {
+                    dayCounter = 0;
+                }
+                dayCounter++;
+        }
 
+        int counter = 0;
+        int avg = 0;
+        for (Map.Entry<Integer, List<Integer>> ent : map.entrySet()){
+            for (Integer val : ent.getValue()){
+                System.out.println("val: " + val);
+                avg += val;
+                counter ++;
 
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(200, series1, "2016-12-19");
-        dataset.addValue(150, series1, "2016-12-20");
-        dataset.addValue(100, series1, "2016-12-21");
-        dataset.addValue(210, series1, "2016-12-22");
-        dataset.addValue(240, series1, "2016-12-23");
-        dataset.addValue(195, series1, "2016-12-24");
-        dataset.addValue(245, series1, "2016-12-25");
+            }
+            System.out.println("avg: " + avg);
+            System.out.println("counter: " + counter);
+            if (avg != 0 ) {
+                dataset.addValue(avg/ent.getValue().size(), series1, String.valueOf(counter));
+            }
 
-        dataset.addValue(150, series2, "2016-12-19");
-        dataset.addValue(130, series2, "2016-12-20");
-        dataset.addValue(95, series2, "2016-12-21");
-        dataset.addValue(195, series2, "2016-12-22");
-        dataset.addValue(200, series2, "2016-12-23");
-        dataset.addValue(180, series2, "2016-12-24");
-        dataset.addValue(230, series2, "2016-12-25");
+            avg = 0;
+            counter = 0;
+        }
 
+       // System.out.print(map);
+       // dataset.addValue((Integer)ittr.next(), series1, String.valueOf(dayCounter));
         return dataset;
     }
 }

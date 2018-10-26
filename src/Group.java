@@ -1,8 +1,8 @@
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Group {
 
+    public static ArrayList chartData = new ArrayList();
     private double P;
 
     private int day;
@@ -21,19 +21,24 @@ public class Group {
         }
     }
 
-    public Group() { } // Constructor for Groupobject
-
     public int simulateIndependent() {
 
         while (finished() < this.people.size()) {
             for (Person person : this.people) {
+
                 if (Math.random() < P) {
                     person.changeOpinion();
+
                 }
             }
+
+
+            chartData.add(finished());
             day++;
-            //System.out.println("Day " + this.day + ": " + finished() + " / " + this.people.size());
+
+           // System.out.println("Day " + this.day + ": " + finished() + " / " + this.people.size());
         }
+
         return day;
     }
 
@@ -71,34 +76,13 @@ public class Group {
                 }
                 counter++;
             }
+
             day++;
             counter = 1;
         }
         return day;
     }
-    /*
-    public void iterateSimulateDependent(int amount, double p) {
-        int totalDays = 0;
-        for (int i = 0; i < amount; i++) {
 
-            totalDays += new Group(50, 3, p).simulateDependent();
-
-            System.out.println(i + 1 + ". Iteration of dependent: Average = " + totalDays / (i + 1));
-        }
-
-    }
-
-    public void iterateSimulateIndependent(int amount, double p) {
-        int totalDays = 0;
-        for (int i = 0; i < amount; i++) {
-
-            totalDays += new Group(50, 0, p).simulateIndependent();
-
-            System.out.println(i + 1 + ". Iteration of Independent: Average = " + totalDays / (i + 1));
-        }
-
-    }
-    */
     private int finished() {
         int sum = 0;
         for (Person person : this.people) {

@@ -25,7 +25,7 @@ public class Simulator {
                 duration = group.simulateIndependent();
             }
             avg += duration;
-            System.out.println(i + 1 + ". Iteration(Independent): " + duration + " days");
+            //System.out.println(i + 1 + ". Iteration(Independent): " + duration + " days");
         }
         avg /= iterations;
         System.out.println("Average: " + avg);
