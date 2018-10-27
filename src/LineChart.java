@@ -20,12 +20,12 @@ public class LineChart extends JFrame {
      */
     public LineChart(String title, List<Double> independent, List<Double> dependent) {
         super(title);
-        DefaultCategoryDataset dataset = createDataset(dependent, independent);
+        DefaultCategoryDataset dataset = createDataset(independent, dependent);
         // Create chart
         JFreeChart chart = ChartFactory.createLineChart(
                 "Spreading of Opinion A", // Chart title
                 "Time (in days)", // X-Axis Label
-                "Popularity of A (in %)", // Y-Axis Label
+                "Average percentage Popularity of A in %", // Y-Axis Label
                 dataset,PlotOrientation.VERTICAL,
                 true,true,false
         );

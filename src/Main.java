@@ -9,8 +9,8 @@ public class Main {
          * A Simulator returns a list containing the average percentage of people in a group which changed
          * their opinion based on the required days
          */
-        List<Double> independent = new Simulator(0.0222, 50, 2000, 0, false).simulate();
-        List<Double> dependent = new Simulator(0.00442, 50, 2000, 3, true).simulate();
+        List<Double> independent = new Simulator(0.1, 50, 5000, 10, false).simulate();
+        List<Double> dependent = new Simulator(0.1, 50, 5000, 10, true).simulate();
 
         /**
          * The invokeLater method delays the construction of the LineChart. The LineChart needs
