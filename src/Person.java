@@ -6,12 +6,12 @@ public class Person {
 
 
     /**
-     * Opinion of the person
+     * Opinion of the person, true if this person has opinion A
      */
     private boolean hasOpinionA;
 
     /**
-     * Person which induces this person to susceptionstate
+     * Person which made this person interested in opinion A
      */
     private Person inducer;
 
@@ -79,9 +79,10 @@ public class Person {
     }
 
     /**
-     *
+     * Checks if two Persons have met each other recently and are receptive for the new opinion
      * @param other Person to check if person is the inducer or this person is the inducer of other person
-     * @return a Boolean which depends on if this or other person is the inducer of this person
+     * @return a Boolean which depends on if this or other person is the inducer of this person; True if this person is
+     *         the inducer of the other person or the other person is the inducer of this person, false if not
      */
     public boolean checkInducerMet(Person other) {
 
